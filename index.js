@@ -24,6 +24,7 @@ mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true});
 
 //------------------------------> Post <-----------------------------//
 app.use(signup);
+app.use(register);
 //---------------------------> Set up PORT <-------------------------//
 let port = process.env.PORT;
 if(port == null || port == ""){
