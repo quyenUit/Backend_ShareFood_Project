@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const signup = require("./routers/Login.js");
 const register = require("./routers/Register.js")
+const uploadpost = require("./routers/UploadPage.js")
 //---------------------------> Express <-----------------------//
 const app = express();
 require('dotenv').config();
@@ -25,6 +26,7 @@ mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true});
 //------------------------------> Post <-----------------------------//
 app.use(signup);
 app.use(register);
+app.use(uploadpost);
 //---------------------------> Set up PORT <-------------------------//
 let port = process.env.PORT;
 if(port == null || port == ""){
