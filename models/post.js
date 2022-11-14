@@ -7,10 +7,8 @@ const UserDBSchema = new mongoose.Schema({
     location: String,
     timeStart: Date,
     timeEnd: Date,
-    file: {
-        public_id: String,
-        url: String
-    }
+    file: String,
+    email: String
 })
 
 const posts = mongoose.model('posts', UserDBSchema);
