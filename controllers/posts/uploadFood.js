@@ -11,6 +11,7 @@ const uploadFood = async(req, res) => {
 
         if(result){
             const postData = {
+                id: now,
                 name,
                 type,
                 timeStart: start,
