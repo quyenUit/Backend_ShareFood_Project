@@ -1,5 +1,6 @@
 const users = require("../models/user.js");
 const bcrypt = require("bcrypt");
+
 const postUserData = async (req, res) => {
   const Username = req.body.username;
   const Password = req.body.password;
