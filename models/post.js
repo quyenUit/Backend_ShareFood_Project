@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
 const UserDBSchema = new mongoose.Schema({
-    id: Number,
-    name: String,
-    type: String,
-    amount: Number,
-    location: String,
-    timeStart: Date,
-    timeEnd: Date,
-    file: String,
-    email: String
-})
+  id: Number,
+  name: String,
+  type: String,
+  amount: Number,
+  location: String,
+  timeStart: Date,
+  timeEnd: Date,
+  file: String,
+  email: String,
+});
 
-const posts = mongoose.model('posts', UserDBSchema);
+const posts = mongoose.model("posts", UserDBSchema);
 
 module.exports = posts;
