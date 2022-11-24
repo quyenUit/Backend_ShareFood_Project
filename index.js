@@ -7,6 +7,7 @@ const signup = require("./routers/Login.js");
 const register = require("./routers/Register.js")
 const uploadpost = require("./routers/UploadPage.js")
 const getPost = require("./routers/PostList.js")
+const OrderFood = require("./routers/Order.js")
 //---------------------------> Express <-----------------------//
 const app = express();
 require('dotenv').config();
@@ -29,6 +30,7 @@ app.use(signup);
 app.use(register);
 app.use(uploadpost);
 app.use(getPost);
+app.use(OrderFood);
 //---------------------------> Set up PORT <-------------------------//
 let port = process.env.PORT;
 if(port == null || port == ""){
