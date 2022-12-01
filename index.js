@@ -11,6 +11,7 @@ const usersInfo = require("./routers/users.js");
 const foodsInfo = require("./routers/foods.js");
 const ordersInfo = require("./routers/orders.js");
 const catsInfo = require("./routers/categories.js");
+const followUsers = require("./routers/follow.js");
 //---------------------------> Express <-----------------------//
 const app = express();
 require("dotenv").config();
@@ -40,6 +41,7 @@ app.use(usersInfo);
 app.use(foodsInfo);
 app.use(ordersInfo);
 app.use(catsInfo);
+app.use(followUsers);
 //---------------------------> Set up PORT <-------------------------//
 let port = process.env.PORT;
 if (port == null || port == "") {
