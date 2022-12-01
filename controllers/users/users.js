@@ -1,5 +1,6 @@
 const users = require("../../models/user.js");
 const bcrypt = require("bcrypt");
+const postUserData = require("../signup.js");
 
 // get api all users
 const getAllUsers = async (req, res) => {
@@ -24,11 +25,23 @@ const getUserDetail = async (req, res) => {
 // update api users by id
 const updateUser = async (req, res) => {
   try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const updateData = {
+      email: req.body.email,
+      password: hashedPassword,
+      address: req.body.address,
+      phone: req.body.phone,
+    };
     const id = req.params.id;
-    const updateData = req.body;
     const options = { new: true };
-    const result = await users.findByIdAndUpdate(id, updateData, options);
+    const result = await users.findOneAndUpdate(
+      { _id: id },
+      { $set: updateData },
+      options
+    );
     res.send(result);
+
+    console.log(result);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -45,4 +58,9 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, getUserDetail, updateUser, deleteUser };
+module.exports = {
+  getAllUsers,
+  getUserDetail,
+  updateUser,
+  deleteUser,
+};
