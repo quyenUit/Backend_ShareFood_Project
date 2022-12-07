@@ -1,11 +1,12 @@
-const users = require("../../models/order.js");
+const orders = require("../../models/order.js");
 const bcrypt = require("bcrypt");
 
 // get api all order
+
 const getAllOrrders = async (req, res) => {
   try {
-    const data = await users.find();
-    res.json(data);
+    const data = await orders.find();
+    res.json(data)
   } catch (error) {
     res.status(500).json({ message: error });
   }

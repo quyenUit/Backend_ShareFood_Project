@@ -2,10 +2,15 @@ const mongoose = require("mongoose");
 
 const UserDBSchema = new mongoose.Schema({
   orderNumber: Number,
-  orderDate: Date,
-  transaction: String,
+  orderDate: {
+    type: Date,
+    default: Date.now
+  },
+  userId: String,
+  userPostEmail: String,
+  postId: String,
   note: String,
-  accepted: Boolean,
+  status: String,
 });
 
 const orders = mongoose.model("orders", UserDBSchema);
