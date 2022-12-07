@@ -9,6 +9,14 @@ const UserDBSchema = new mongoose.Schema({
   lastlogin: Date,
   createdate: Date,
   active: Boolean,
+  followers: {
+    type: Array,
+    default: [],
+  },
+  followings: {
+    type: Array,
+    default: [],
+  },
 });
 
 const users = mongoose.model("users", UserDBSchema);
