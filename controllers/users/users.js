@@ -6,7 +6,15 @@ const postUserData = require("../signup.js");
 const getAllUsers = async (req, res) => {
   try {
     const data = await users.find();
-    res.json(data);
+    res.json(data.map((item) => {
+      return {
+        _id: item._id,
+        phone: item.phone,
+        fname: item.fname,
+        address: item.address,
+        email: item.email,
+      }
+    }))
   } catch (error) {
     res.status(500).json({ message: error });
   }
