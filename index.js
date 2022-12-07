@@ -7,6 +7,7 @@ const signup = require("./routers/Login.js");
 const register = require("./routers/Register.js");
 const uploadpost = require("./routers/UploadPage.js");
 const getPost = require("./routers/PostList.js");
+const getOrder = require("./routers/Order.js")
 const usersInfo = require("./routers/users.js");
 const foodsInfo = require("./routers/foods.js");
 const ordersInfo = require("./routers/orders.js");
@@ -37,6 +38,7 @@ app.use(signup);
 app.use(register);
 app.use(uploadpost);
 app.use(getPost);
+app.use(getOrder);
 app.use(usersInfo);
 app.use(foodsInfo);
 app.use(ordersInfo);
