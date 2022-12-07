@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const UserDBSchema = new mongoose.Schema(
   {
     name: {
-      type: String,
-      trim: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
     },
     following: {
       type: Array,
