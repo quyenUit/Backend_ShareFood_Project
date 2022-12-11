@@ -1,28 +1,58 @@
 const posts = require("../../models/post.js");
 const orders = require("../../models/order.js")
+const GetOrderFood = async(req, res) => {
+    const {userId} = req.params;
+    await orders.find({userId: userId}).then(data => {
+        res.json({
+            statusCode: 200,
+            data: data
+        })
+    }).catch(err => {
+        res.json({
+            statusCode: 500,
+            err: err
+        })
+    })
+
+}
+
+const GetOrderFoodByOwn = async(req, res) => {
+    const {userPostEmail} = req.params;
+    await orders.find({userPostEmail: userPostEmail}).then(data => {
+        res.json({
+            statusCode: 200,
+            data: data
+        })
+    }).catch(err => {
+        res.json({
+            statusCode: 500,
+            err: err
+        })
+    })
+}
+
 const OrderFood = async(req, res) => {
-    const orderFood = posts.findOneAndUpdate({_id: req.body.id}, 
-        {$set:{amount: req.body.amount}}, 
-        {new: true}, 
-        (err, doc) => {
+    if(req.body.status === "Success"){
+        const updatePost =  posts.findOneAndUpdate({_id: req.body.id}, 
+            {$set:{amount: req.body.amount}}, 
+            {new: true}, 
+            (err, doc) => {
+            if(err){
+                console.log("Something wrong when updating data!");
+            }
+        })
+    }
+    const updateStatus = orders.findOneAndUpdate({_id: req.body.orderId},
+    {$set:{status: req.body.status}},
+    {new: true},
+    (err, doc) => {
         if(err){
-            console.log("Something wrong when updating data!");
+            console.log("Something wrong");
         }
     })
-    if(orderFood){
-        await orders.deleteOne({_id: req.body.orderId}).then(() => {
-            console.log("Data deleted")
-        }).catch((err) => {
-            console.log(err);
-        }); 
+    if(updateStatus){
         res.json({
             success: true,
-            message: "Update successfully"
-        })
-    }else{
-        res.json({
-            success: false,
-            message: "Update failed"
         })
     }
 }
@@ -45,4 +75,4 @@ const DeleteOrderFood = async(req, res) => {
     })
 }
 
-module.exports = {OrderFood, DeleteOrderFood};
+module.exports = {OrderFood, DeleteOrderFood, GetOrderFood, GetOrderFoodByOwn};
