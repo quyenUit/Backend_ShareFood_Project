@@ -10,9 +10,7 @@ const UserDBSchema = new mongoose.Schema({
   createdate: Date,
   lname: String,
   active: Boolean,
-
-  phone: String
-
+  phone: String,
 });
 
 const users = mongoose.model("users", UserDBSchema);

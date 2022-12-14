@@ -34,6 +34,29 @@ const updateFood = async (req, res) => {
   }
 };
 
+//
+const updateFoodInAdmin = async (req, res) => {
+  try {
+    const updateData = {
+      name: req.body.name,
+      location: req.body.location,
+      amount: req.body.amount,
+    };
+    const id = req.params.id;
+    const options = { new: true };
+    const result = await users.findOneAndUpdate(
+      { _id: id },
+      { $set: updateData },
+      options
+    );
+    res.send(result);
+
+    console.log(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 // delete api food by id
 const deleteFood = async (req, res) => {
   try {
@@ -45,4 +68,10 @@ const deleteFood = async (req, res) => {
   }
 };
 
-module.exports = { getAllFoods, getFoodDetail, updateFood, deleteFood };
+module.exports = {
+  getAllFoods,
+  getFoodDetail,
+  updateFood,
+  deleteFood,
+  updateFoodInAdmin,
+};
