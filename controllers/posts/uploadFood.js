@@ -5,7 +5,7 @@ const uploadFood = async(req, res) => {
     let date_ob = new Date(now);
     let start = new Date(date_ob.getFullYear(),date_ob.getMonth(),date_ob.getDate()+1, req.body.dateStart.split(':')[0]-7, req.body.dateStart.split(':')[1]);
     let end = new Date(date_ob.getFullYear(),date_ob.getMonth(),date_ob.getDate()+1, req.body.dateEnd.split(':')[0]-7, req.body.dateEnd.split(':')[1]);
-    const {name, type, location, file, email} = req.body;
+    const {name, type, location, file, email, amount} = req.body;
     try{
         const result = await cloudinary.uploader.upload(file, {})
 
@@ -18,7 +18,8 @@ const uploadFood = async(req, res) => {
                 timeEnd: end,
                 location,
                 file: result.secure_url,
-                email
+                email,
+                amount
             }
 
             const postInsertData = await posts.insertMany(postData);
