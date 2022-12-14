@@ -6,15 +6,18 @@ const postUserData = require("../signup.js");
 const getAllUsers = async (req, res) => {
   try {
     const data = await users.find();
-    res.json(data.map((item) => {
-      return {
-        _id: item._id,
-        phone: item.phone,
-        fname: item.fname,
-        address: item.address,
-        email: item.email,
-      }
-    }))
+    res.json(
+      data.map((item) => {
+        return {
+          _id: item._id,
+          phone: item.phone,
+          username: item.username,
+          address: item.address,
+          email: item.email,
+          createdate: item.createdate,
+        };
+      })
+    );
   } catch (error) {
     res.status(500).json({ message: error });
   }
@@ -50,8 +53,31 @@ const updateUser = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const updateData = {
-      email: req.body.email,
+      username: req.body.username,
       password: hashedPassword,
+      address: req.body.address,
+      phone: req.body.phone,
+    };
+    const id = req.params.id;
+    const options = { new: true };
+    const result = await users.findOneAndUpdate(
+      { _id: id },
+      { $set: updateData },
+      options
+    );
+    res.send(result);
+
+    console.log(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+//
+const updateUserInAdmin = async (req, res) => {
+  try {
+    const updateData = {
+      username: req.body.username,
       address: req.body.address,
       phone: req.body.phone,
     };
@@ -133,4 +159,5 @@ module.exports = {
   deleteUser,
   follow,
   unfollow,
+  updateUserInAdmin,
 };

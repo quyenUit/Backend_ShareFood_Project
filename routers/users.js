@@ -10,5 +10,6 @@ routes.patch("/users/update/:id", userController.updateUser);
 routes.delete("/users/delete/:id", userController.deleteUser);
 routes.put("users/:id/follow", userController.follow);
 routes.put("users/:id/unfollow", userController.unfollow);
+routes.put("/users/:id", userController.updateUserInAdmin);
 
 module.exports = routes;
