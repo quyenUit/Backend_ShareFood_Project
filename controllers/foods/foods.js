@@ -62,7 +62,7 @@ const deleteFood = async (req, res) => {
   try {
     const id = req.params.id;
     const data = await users.findByIdAndDelete(id);
-    res.send(`User with id ${data.id} has been deleted...`);
+    res.send(`Food  with id ${data.id} has been deleted...`);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
