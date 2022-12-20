@@ -29,6 +29,7 @@ const updateFood = async (req, res) => {
     const options = { new: true };
     const result = await users.findByIdAndUpdate(id, updateData, options);
     res.send(result);
+    console.log(result);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -42,7 +43,7 @@ const updateFoodInAdmin = async (req, res) => {
       location: req.body.location,
       amount: req.body.amount,
     };
-    const id = req.params.id;
+    const id = req.params._id;
     const options = { new: true };
     const result = await users.findOneAndUpdate(
       { _id: id },

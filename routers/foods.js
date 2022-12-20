@@ -148,5 +148,5 @@ routes.post("/foods/update/:id", userController.updateFood);
  */
 routes.delete("/foods/delete/:id", userController.deleteFood);
 
-routes.put("/foods/:id", userController.updateFoodInAdmin);
+routes.post("/foods/:id", userController.updateFoodInAdmin);
 module.exports = routes;
