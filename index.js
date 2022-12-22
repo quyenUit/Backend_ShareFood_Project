@@ -20,9 +20,11 @@ app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "30mb" }));
 app.use("/", cors());
 app.use((req, res, next) => {
-  // res.setHeader("Access-Control-Allow-Origin", "https://share-food-app-quyenuit.vercel.app");
+  // res.setHeader("Access-Control-Allow-Origin",);
   res.setHeader(
     "Access-Control-Allow-Origin",
+    "https://share-food-app-quyenuit.vercel.app",
+    "*",
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization ",
     "GET, POST, PATH, DELETE, PUT"
