@@ -1,4 +1,4 @@
-const posts = require('../../models/post.js');
+const posts = require("../../models/post.js");
 const cloudinary = require("../../utils/cloudinary.js");
 const uploadFood = async(req, res) => {
     const now = Date.now();
@@ -9,30 +9,30 @@ const uploadFood = async(req, res) => {
     try{
         const result = await cloudinary.uploader.upload(file, {})
 
-        if(result){
-            const postData = {
-                id: now,
-                name,
-                type,
-                timeStart: start,
-                timeEnd: end,
-                location,
-                file: result.secure_url,
-                email,
-                amount
-            }
+    if (result) {
+      const postData = {
+        id: now,
+        name,
+        type,
+        timeStart: start,
+        timeEnd: end,
+        location,
+        file: result.secure_url,
+        email,
+        amount,
+      };
 
-            const postInsertData = await posts.insertMany(postData);
+      const postInsertData = await posts.insertMany(postData);
 
-            if(!postInsertData){
-                throw new Error("Can not upload");
-            }else{
-                res.status(200).send({message: "Successful Post"});
-            }
-        }
-    }catch(err){
-        res.status(404).send();
+      if (!postInsertData) {
+        throw new Error("Can not upload");
+      } else {
+        res.status(200).send({ message: "Successful Post" });
+      }
     }
-}
+  } catch (err) {
+    res.status(404).send();
+  }
+};
 
 module.exports = uploadFood;

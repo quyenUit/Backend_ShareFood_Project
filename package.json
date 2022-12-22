@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js ",
+    "server": "json-server --watch db.json --port 3001 --middlewares ./range.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "genAPIDoc": "apidoc -i ./routers -o ./public/docs/"
   },
   "repository": {
     "type": "git",
@@ -24,10 +29,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "json-server": "^0.17.1",
     "mongoose": "^6.7.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "apidoc": "0.53.1"
   }
 }

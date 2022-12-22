@@ -5,11 +5,12 @@ const UserDBSchema = new mongoose.Schema({
   email: String,
   password: String,
   address: String,
+  phone: String,
   lastlogin: Date,
   createdate: Date,
   lname: String,
   active: Boolean,
-  phone: String
+  phone: String,
 });
 
 const users = mongoose.model("users", UserDBSchema);

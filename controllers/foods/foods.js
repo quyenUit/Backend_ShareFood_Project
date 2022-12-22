@@ -29,6 +29,30 @@ const updateFood = async (req, res) => {
     const options = { new: true };
     const result = await users.findByIdAndUpdate(id, updateData, options);
     res.send(result);
+    console.log(result);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+//
+const updateFoodInAdmin = async (req, res) => {
+  try {
+    const updateData = {
+      name: req.body.name,
+      location: req.body.location,
+      amount: req.body.amount,
+    };
+    const id = req.params._id;
+    const options = { new: true };
+    const result = await users.findOneAndUpdate(
+      { _id: id },
+      { $set: updateData },
+      options
+    );
+    res.send(result);
+
+    console.log(result);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -39,10 +63,16 @@ const deleteFood = async (req, res) => {
   try {
     const id = req.params.id;
     const data = await users.findByIdAndDelete(id);
-    res.send(`User with id ${data.id} has been deleted...`);
+    res.send(`Food  with id ${data.id} has been deleted...`);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-module.exports = { getAllFoods, getFoodDetail, updateFood, deleteFood };
+module.exports = {
+  getAllFoods,
+  getFoodDetail,
+  updateFood,
+  deleteFood,
+  updateFoodInAdmin,
+};

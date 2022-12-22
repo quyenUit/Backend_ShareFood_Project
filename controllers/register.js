@@ -2,6 +2,13 @@ const users = require("../models/user.js");
 const bcrypt = require("bcrypt");
 
 const AddUserAccount = async (req, res) => {
+  const now = Date.now();
+  let date_ob = new Date(now);
+  let start = new Date(
+    date_ob.getFullYear(),
+    date_ob.getMonth(),
+    date_ob.getDate() + 1
+  );
   try {
     // Hash Password
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -9,6 +16,7 @@ const AddUserAccount = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
+      createdate: start,
     };
     const CheckUserData = await users.findOne({ email: req.body.email });
     if (CheckUserData) {
